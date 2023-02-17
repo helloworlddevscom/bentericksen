@@ -1,0 +1,55 @@
+const Page = require('./Page')
+
+class PolicyEditor extends Page {
+    async open () {
+        super.open('/user/policies')
+        browser.pause(1000)
+    }
+
+    resetAll() {
+      $('a=POLICIES').click()
+
+      $('a=RESET POLICIES').click()
+      
+      browser.pause(1000)
+
+      $('a=Reset Policies').click()
+
+      browser.pause(5000)
+    }
+
+    openPolicy(index) {
+        $$('a=EDIT')[index].click()
+    }
+
+    edit(index, text) {
+        $$('a=EDIT')[index].click()
+
+        browser.pause(4000)
+    
+        browser.switchToFrame($('.cke_wysiwyg_frame'))
+    
+        $('body').addValue(text)
+    
+        browser.switchToParentFrame()
+    
+        browser.pause(2000)
+    
+        $('button=SAVE').click()
+    }
+
+
+    reset(index) {
+        $$('a=EDIT')[index].click()
+
+        browser.pause(2000)
+    
+        $('[name=reset]').click()
+
+        browser.pause(2000)
+
+        $('#js-reset-policy').click()
+    }
+}
+
+module.exports = new PolicyEditor()

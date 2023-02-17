@@ -1,0 +1,5 @@
+**/*.min.js
+**/*.spec.js
+webpack.mix.js
+node_modules/**/*
+vendor/**/*

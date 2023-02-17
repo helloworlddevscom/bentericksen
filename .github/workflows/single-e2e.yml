@@ -1,0 +1,50 @@
+name: Single e2e
+
+on:
+  workflow_dispatch:
+    inputs:
+      spec:
+        required: true
+        description: "Spec to test (default *)"
+
+jobs:
+  e2e-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Docker login
+      run: |
+        docker login docker.pkg.github.com -u $GITHUB_ACTOR -p $GITHUB_TOKEN
+        docker login ghcr.io -u $GITHUB_ACTOR -p "${{ secrets.PACKAGE_TOKEN }}"
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    - name: genereate ssl keys
+      run: openssl req -config docker/nginx/openssl.cnf -new -sha256 -newkey rsa:2048 -nodes -keyout docker/nginx/nginx-selfsigned-hrdirector.key -x509 -days 825 -out docker/nginx/nginx-selfsigned-hrdirector.crt
+    - name: Build the e2e testing stack
+      run: docker-compose -f docker-compose.e2e.yml build
+    - name: Install PHP Dependencies
+      run: |
+        docker-compose -f docker-compose.e2e.yml run --rm php composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+        docker-compose -f docker-compose.e2e.yml run --rm php composer require caxy/php-htmldiff
+    - name: Prep e2e testing environment
+      run: docker-compose -f docker-compose.e2e.yml run --rm php ./test-setup.sh
+    - uses: nanasess/setup-chromedriver@v1
+      with:
+        chromedriver-version: '84.0.4147.30'
+    - name: Install NPM Dependencies
+      run: docker-compose -f docker-compose.e2e.yml run --rm node yarn install
+    - name: Building Frontend
+      run: docker-compose -f docker-compose.e2e.yml run --rm node yarn run prod
+    - name: Run e2e Tests
+      run: |
+        spec="${{ github.event.inputs.spec }}"
+
+        if [ -z $spec ]; then
+          echo "No Spec set: $spec. Exiting..."
+          exit 0
+        fi
+
+        ./test-e2e-spec.sh windows.chrome docker-compose.e2e.yml $BROWSER_STACK_USER $BROWSER_STACK_KEY $spec
+      env:
+        BROWSER_STACK_KEY: ${{secrets.BROWSER_STACK_KEY}}
+        BROWSER_STACK_USER: ${{secrets.BROWSER_STACK_USER}}

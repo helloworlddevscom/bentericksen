@@ -1,0 +1,19 @@
+/**
+Custom styles used inside the CKEditor iframe. These override the CKEditor defaults.
+
+This file can be included in the editor by adding the "config.contentsCss" setting in
+httpdocs/assets/js/plugins/ckeditor/admin_config.js or httpdocs/assets/js/plugins/ckeditor/config.js
+*/
+
+.cke_editable {
+  font-size: 11pt;
+}
+
+.cke_editable table  {
+ border-spacing: 1px;
+}
+
+.cke_editable table  tbody  tr  td  p {
+  margin: 0;
+}
+

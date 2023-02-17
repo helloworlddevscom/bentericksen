@@ -1,0 +1,83 @@
+import { shallowMount, createLocalVue } from '@vue/test-utils';
+import Vuex from 'vuex'
+import SetBonusPercentage from "@/components/bonuspro/form/SetBonusPercentage.vue";
+import planData from "../../../store/modules/planData";
+import employeesAndFunds from "../../../store/modules/employeesAndFunds";
+import initialSetup from "../../../store/modules/initialSetup";
+import bonusPercentage from "../../../store/modules/bonusPercentage";
+
+const localVue = createLocalVue();
+
+localVue.use(Vuex);
+
+describe('SetBonusPercentage', () => {
+    let store;
+    let ui_state = {};
+    let initialSetup_state = {};
+    let employeesAndFunds_state = {
+      employees: [],
+      funds: [],
+      activeEmployee: null,
+      errors: {
+        employees: null,
+        funds: null,
+      }
+    };
+    let planData_state = {
+        activeMonths: []
+    };
+    let actions = {};
+    let bonusPercentage_state = {};
+
+    beforeEach(() => {
+        store = new Vuex.Store({
+          modules: {
+              ui: {
+                ui_state,
+                actions
+              },
+              initialSetup: {
+                initialSetup_state,
+                actions,
+                getters: initialSetup.getters
+              },
+            employeesAndFunds: {
+              employeesAndFunds_state,
+              actions,
+              getters: employeesAndFunds.getters
+            },
+            planData: {
+              planData_state,
+              actions,
+              getters: planData.getters
+            },
+            bonusPercentage: {
+              bonusPercentage_state,
+              actions,
+              getters: bonusPercentage.getters
+            }
+          }
+            // state: {
+            //     ui: {},
+            //     initialSetup: {},
+            //     employeesAndFunds: {
+            //         employees: []
+            //     },
+            //     planData: {
+            //       activeMonths: []
+            //     },
+            //     bonusPercentage: {}
+            // },
+            // getters:
+        })
+    });
+
+    it('calculates the goal amounts', () => {
+
+        console.log("SetBonusPercentage = ", SetBonusPercentage);
+        return
+
+        const wrapper = shallowMount(SetBonusPercentage, { store, localVue });
+        expect(wrapper.productionCollectionGoal).toBe(42, "incorrect productionCollectionGoal")
+    });
+});

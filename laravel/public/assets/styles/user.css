@@ -1,0 +1,1019 @@
+#sortable {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+table .group {
+    color: var(--main-primary);
+}
+
+.dashTables .ui-state-default,
+.dashTables .ui-widget-content .ui-state-default,
+.dashTables .ui-widget-header .ui-state-default {
+    border: none;
+    background: none;
+    min-height: 390px;
+}
+
+table.dataTable tbody th, table.dataTable tbody td {
+    padding: 5px 5px;
+}
+
+#reorder_dashboard {
+    margin-bottom: 10px;
+}
+
+#reorder_dashboard #sortable {
+    width: 70%;
+    margin: 0 auto;
+}
+
+#tos_content {
+    max-height: 400px;
+    overflow: auto;
+    margin-bottom: 10px;
+}
+
+#calendar {
+    box-shadow: 5px 5px 10px;
+}
+
+#calendar_nav > h3,
+#main > div > div:nth-child(1) > h4 {
+    margin-top: -25px;
+}
+
+#cal-slide-box,
+#cal-slide-content {
+    background-image: none;
+    background-color: var(--main-primary);
+}
+
+.img_key {
+    height: 10px;
+    width: 30px;
+    margin-top: 5px;
+}
+
+.event {
+    display: block;
+    background-color: inherit;
+    margin-bottom: 5px;
+    -webkit-box-shadow: inset 0 0 5px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: inset 0 0 5px 0 rgba(0, 0, 0, 0.4);
+    border-radius: 0px;
+    border: 0;
+}
+
+.approved::after {
+    font-family: FontAwesome;
+    content: "\f00c";
+    position: relative;
+    left: 0px;
+    bottom: 3px;
+    color: green;
+}
+
+.denied::after {
+    font-family: FontAwesome;
+    content: "\f00d";
+    position: relative;
+    left: 1px;
+    bottom: 3px;
+    color: red;
+}
+
+/*.pending::after	{font-family:FontAwesome;content:"\f0c8";position:relative;left:1px;bottom:2px;color:black;}*/
+.leave::after {
+    font-family: FontAwesome;
+    content: "\f0c8";
+    position: relative;
+    left: 1px;
+    bottom: 2px;
+    color: blue;
+}
+
+.navbar {
+    margin-bottom: -1px;
+    border-radius: 0;
+}
+
+#submenu {
+    background-color: #e7e7e7;
+    margin-bottom: 20px;
+}
+
+.collapsing {
+    display: none;
+}
+
+.tab-content.with-subnav ul.nav {
+    background: var(--main-primary);
+    min-height: 33px;
+}
+
+.tab-content.with-subnav ul.nav li a {
+    background: var(--main-primary);
+    color: #fff;
+    padding: 3px 30px;
+    margin: 4px;
+    border-radius: 0;
+    border: 0;
+}
+
+.tab-content.with-subnav ul.nav li.active a {
+    color: #fff;
+    border: none;
+}
+
+.tab-content.with-subnav ul.nav li.active a:hover {
+    border: 0;
+}
+
+.nav-tabs div.row {
+    padding: 0;
+}
+
+.emp-buttons button {
+    width: 208px;
+    margin: 3px 0;
+}
+
+.classifications .date-box {
+    margin-top: 6px;
+}
+
+.tab-pane {
+    padding-bottom: 3px;
+}
+
+.history-heading {
+    margin-top: 10px;
+    margin-bottom: 3px;
+    background-color: #bebebe;
+    color: #000;
+}
+
+.modal-footer {
+    text-align: center;
+}
+
+.ui-datepicker-header.ui-widget-content {
+    border: 1px solid var(--main-primary);
+}
+
+.ui-datepicker-header.ui-widget-header {
+    border: 1px solid var(--main-primary);
+    background: var(--main-primary);
+}
+
+/*
+  Keep nSync with employee.css
+ */
+.ui-datepicker-calendar .ui-state-default,
+.ui-datepicker-calendar .ui-widget-content .ui-state-default,
+.ui-datepicker-calendar .ui-widget-header .ui-state-default {
+    border: 1px solid #5d6d78;
+    background: #BEC5C9;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+}
+
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    background: red;
+    cursor: inherit;
+    display: block;
+}
+
+input[readonly] {
+    background-color: white !important;
+    cursor: text !important;
+}
+
+.emp-assign .ui-state-active {
+    background: initial;
+    color: initial;
+}
+
+.emp-assign.ui-accordion .ui-accordion-header {
+    padding: 2px .5em .5em 2.2em;
+}
+
+.emp-wrap {
+    max-height: 190px;
+    padding: 0 !important;
+    overflow: hidden;
+    overflow-y: scroll;
+    background: var(--main-primary);
+}
+
+#preview_tab li a,
+#plan_tab li a,
+#employee_tab li a {
+    color: #000;
+    background: #F5F5F5;
+}
+
+#preview_tab li a:hover,
+#preview_tab li a:focus,
+#plan_tab li a:hover,
+#plan_tab li a:focus,
+#employee_tab li a:hover,
+#employee_tab li a:focus {
+    background: #C7C7C7;
+}
+
+#preview_tab li.active a,
+#preview_tab li.active a:hover,
+#preview_tab li.active a:focus,
+#plan_tab li.active a,
+#plan_tab li.active a:hover,
+#plan_tab li.active a:focus,
+#employee_tab li.active a,
+#employee_tab li.active a:hover,
+#employee_tab li.active a:focus {
+    color: #fff;
+    background: var(--main-primary);
+}
+
+.reports_table {
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+#reports_table {
+    margin-bottom: 0;
+}
+
+.nav > li > a,
+.nav > li > span {
+    padding: 10px 14px;
+}
+
+.nav > li > span {
+    display: block;
+}
+
+.account_box {
+    min-height: 293px;
+}
+
+.buttons {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.fa-select {
+    font-family: sans-serif, 'FontAwesome';
+}
+
+.subTotals {
+    padding-left: 2px;
+}
+
+#progressbar .ui-widget-header {
+    background: var(--main-primary);
+}
+
+.emp-heading {
+    text-align: center;
+    border-radius: 15px 15px 0 0;
+    margin-bottom: 7px;
+}
+
+.caret.emp-caret {
+    bottom: -1px;
+    left: 45%;
+}
+
+.tab-content.with-subnav ul.nav li:after {
+    position: absolute;
+    top: 22%;
+    right: 0;
+    color: #fff;
+    content: "|";
+}
+
+.tab-content.with-subnav ul.nav li.last:after {
+    content: "";
+}
+
+.emp-content {
+    max-height: 600px;
+    height: 80%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.input-group-addon label {
+    margin-bottom: 1px;
+}
+
+.emp-group {
+    margin-top: 35px;
+    margin-bottom: 15px;
+}
+
+.emp-group .input-group {
+    margin-top: -3px;
+}
+
+.emp-group .input-group-addon {
+    padding: 0 1px;
+    color: #000;
+    width: 30px;
+    background-color: #fff;
+    border-right: 1px solid #ccc;
+    border-radius: 0;
+}
+
+.emp-group .input-group img {
+    max-width: 20px;
+}
+
+#employeeTabs .sub-tab .nav-tabs li span.caret.emp-caret {
+    display: none;
+}
+
+#employeeTabs .sub-tab .nav-tabs li.active span.caret.emp-caret {
+    display: block;
+}
+
+.modal {
+    z-index: 9999;
+}
+
+#main_navigation_wrap {
+    z-index: 8888;
+    position: relative;
+}
+
+.designator {
+    width: 15px;
+    display: inline-block;
+    height: auto;
+}
+
+#policy_list tr.edited td {
+    background: #e7c9f7;
+}
+
+#policy_list tr.disabled td {
+    background: #bbbbbb;
+}
+
+.calculators .accordion h3 {
+    font-size: 14px;
+}
+
+#faqs h3 {
+    font-size: 14px;
+}
+
+#faqs h3.ui-state-default {
+    color: #000;
+}
+
+#faqs h3 h3.clearfix p {
+    background: #bbbbbb;
+}
+
+#faqs .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+    background: #fff;
+    color: #fff;
+}
+
+#faqs .ui-accordion-header {
+    margin-bottom: 0px;
+}
+
+#faqs .accordion {
+    padding: 0px;
+}
+
+#faqs p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#faqs div.ui-accordion-content {
+    padding-bottom: 0px;
+}
+
+hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.ui_tpicker_minute_slider .ui-slider-handle, .ui_tpicker_hour_slider .ui-slider-handle {
+    background: var(--main-primary) none repeat scroll 0 0 !important;
+    border: 1px solid var(--main-primary) !important;
+}
+
+#modalJobDescriptions .modal-body {
+    text-align: justify;
+}
+
+#modalJobDescriptions .modal-dialog {
+    width: 1170px;
+}
+
+.reset-select {
+    margin-right: 4px;
+}
+
+.head {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.head a {
+    text-decoration: none;
+    color: #000;
+}
+
+.modalPolicyCompare .modal-dialog {
+    width: 1170px;
+    height: 90%;
+}
+
+.old-policy {
+    width: 49.8%;
+    text-align: justify;
+    display: inline-block;
+    padding: 20px;
+    height: 500px;
+    overflow-y: scroll;
+}
+
+.new-policy-required {
+    width: 49.8%;
+    text-align: justify;
+    display: inline-block;
+    padding: 20px;
+    height: 500px;
+    overflow-y: scroll;
+}
+
+.policy-pick .checkbox label {
+    text-transform: uppercase;
+}
+
+#content_raw {
+    width: 48%;
+    height: 500px;
+    display: inline-block;
+    text-align: justify;
+}
+
+.modal #cke_content_raw {
+    display: inline-block;
+    text-align: justify;
+}
+
+#cke_content_raw .cke_inner .cke_contents {
+    height: 395px !important;
+}
+
+.policies-out-of {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.update-complete-text {
+    text-align: center;
+}
+
+.update-complete {
+    margin-top: 20px;
+    text-transform: uppercase;
+}
+
+.cancel-link {
+    margin-top: 10px;
+}
+
+.policy-update-notification {
+    margin-top: 2px;
+    background-color: #ff0000;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.policy-notification {
+    margin-top: 7px;
+}
+
+.policy-update-button {
+    color: #fff;
+    background-color: transparent;
+}
+
+.policy-update-button:hover, .policy-update-button:active, .policy-update-button:focus, .policy-update-button:visited {
+    color: #fff;
+}
+
+#sortable {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+table .group {
+    color: var(--main-primary);
+}
+
+.dashTables .ui-state-default,
+.dashTables .ui-widget-content .ui-state-default,
+.dashTables .ui-widget-header .ui-state-default {
+    border: none;
+    background: none;
+    min-height: 390px;
+}
+
+table.dataTable tbody th, table.dataTable tbody td {
+    padding: 5px 5px;
+}
+
+#reorder_dashboard {
+    margin-bottom: 10px;
+}
+
+#reorder_dashboard #sortable {
+    width: 70%;
+    margin: 0 auto;
+}
+
+#tos_content {
+    max-height: 400px;
+    overflow: auto;
+    margin-bottom: 10px;
+}
+
+#calendar {
+    box-shadow: 5px 5px 10px;
+}
+
+#calendar_nav > h3,
+#main > div > div:nth-child(1) > h4 {
+    margin-top: -25px;
+}
+
+#calendar_nav {
+    position: relative;
+}
+
+#calendar_nav .link-prev {
+    position: absolute;
+    left: 0;
+}
+#calendar_nav .link-next {
+    position: absolute;
+    right: 0;
+    text-align: right;
+}
+
+#cal-slide-box,
+#cal-slide-content {
+    background-image: none;
+    background-color: var(--main-primary);
+}
+
+.img_key {
+    height: 10px;
+    width: 30px;
+    margin-top: 5px;
+}
+
+.event {
+    display: block;
+    background-color: inherit;
+    margin-bottom: 5px;
+    -webkit-box-shadow: inset 0 0 5px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: inset 0 0 5px 0 rgba(0, 0, 0, 0.4);
+    border-radius: 0px;
+    border: 0;
+}
+
+.navbar {
+    margin-bottom: -1px;
+    border-radius: 0;
+}
+
+#submenu {
+    background-color: #e7e7e7;
+    margin-bottom: 20px;
+}
+
+.collapsing {
+    display: none;
+}
+
+.tab-content.with-subnav ul.nav {
+    background: var(--main-primary);
+    min-height: 33px;
+}
+
+.tab-content.with-subnav ul.nav li a {
+    background: var(--main-primary);
+    color: #fff;
+    padding: 3px 30px;
+    margin: 4px;
+    border-radius: 0;
+    border: 0;
+}
+
+.tab-content.with-subnav ul.nav li.active a {
+    color: #fff;
+    border: none;
+}
+
+.tab-content.with-subnav ul.nav li.active a:hover {
+    border: 0;
+}
+
+.nav-tabs div.row {
+    padding: 0;
+}
+
+.emp-buttons button {
+    width: 208px;
+    margin: 3px 0;
+}
+
+.classifications .date-box {
+    margin-top: 6px;
+}
+
+.tab-pane {
+    padding-bottom: 3px;
+}
+
+.history-heading {
+    margin-top: 10px;
+    margin-bottom: 3px;
+    background-color: #bebebe;
+    color: #000;
+}
+
+.modal-footer {
+    text-align: center;
+}
+
+.ui-datepicker-header.ui-widget-content {
+    border: 1px solid var(--main-primary);
+}
+
+.ui-datepicker-header.ui-widget-header {
+    border: 1px solid var(--main-primary);
+    background: var(--main-primary);
+}
+
+.ui-datepicker-calendar .ui-state-default,
+.ui-datepicker-calendar .ui-widget-content .ui-state-default,
+.ui-datepicker-calendar .ui-widget-header .ui-state-default {
+    border: 1px solid #5d6d78;
+    background: #BEC5C9;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+}
+
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    background: red;
+    cursor: inherit;
+    display: block;
+}
+
+input[readonly] {
+    background-color: white !important;
+    cursor: text !important;
+}
+
+.emp-assign .ui-state-active {
+    background: initial;
+    color: initial;
+}
+
+.emp-assign.ui-accordion .ui-accordion-header {
+    padding: 2px .5em .5em 2.2em;
+}
+
+.emp-wrap {
+    max-height: 190px;
+    padding: 0 !important;
+    overflow: hidden;
+    overflow-y: scroll;
+    background: var(--main-primary);
+}
+
+#employee_tab li a {
+    color: #000;
+    background: #F5F5F5;
+}
+
+#employee_tab li a:hover,
+#employee_tab li a:focus {
+    background: #C7C7C7;
+}
+
+#employee_tab li.active a,
+#employee_tab li.active a:hover,
+#employee_tab li.active a:focus {
+    color: #fff;
+    background: var(--main-primary);
+}
+
+.reports_table {
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+#reports_table {
+    margin-bottom: 0;
+}
+
+.account_box {
+    min-height: 293px;
+}
+
+.buttons {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.fa-select {
+    font-family: sans-serif, 'FontAwesome';
+}
+
+.subTotals {
+    padding-left: 2px;
+}
+
+#progressbar .ui-widget-header {
+    background: var(--main-primary);
+}
+
+.emp-heading {
+    text-align: center;
+    border-radius: 15px 15px 0 0;
+    margin-bottom: 7px;
+}
+
+.caret.emp-caret {
+    bottom: -1px;
+    left: 45%;
+}
+
+.tab-content.with-subnav ul.nav li:after {
+    position: absolute;
+    top: 22%;
+    right: 0;
+    color: #fff;
+    content: "|";
+}
+
+.tab-content.with-subnav ul.nav li.last:after {
+    content: "";
+}
+
+.emp-content {
+    max-height: 600px;
+    height: 80%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.input-group-addon label {
+    margin-bottom: 1px;
+}
+
+.emp-group {
+    margin-top: 35px;
+    margin-bottom: 15px;
+}
+
+.emp-group .input-group {
+    margin-top: -3px;
+}
+
+.emp-group .input-group-addon {
+    padding: 0 1px;
+    color: #000;
+    width: 30px;
+    background-color: #fff;
+    border-right: 1px solid #ccc;
+    border-radius: 0;
+}
+
+.emp-group .input-group img {
+    max-width: 20px;
+}
+
+#employeeTabs .sub-tab .nav-tabs li span.caret.emp-caret {
+    display: none;
+}
+
+#employeeTabs .sub-tab .nav-tabs li.active span.caret.emp-caret {
+    display: block;
+}
+
+.modal {
+    z-index: 9999;
+}
+
+#main_navigation_wrap {
+    z-index: 1039;
+    position: relative;
+}
+
+.designator {
+    width: 15px;
+    display: inline-block;
+    height: auto;
+}
+
+#policy_list tr.edited td {
+    background: #e7c9f7;
+}
+
+#policy_list tr.disabled td {
+    background: #bbbbbb;
+}
+
+.calculators .accordion h3 {
+    font-size: 14px;
+}
+
+#faqs h3 {
+    font-size: 14px;
+}
+
+#faqs h3.ui-state-default {
+    color: #000;
+}
+
+#faqs h3 h3.clearfix p {
+    background: #bbbbbb;
+}
+
+#faqs .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+    background: #fff;
+    color: #fff;
+}
+
+#faqs .ui-accordion-header {
+    margin-bottom: 0px;
+}
+
+#faqs .accordion {
+    padding: 0px;
+}
+
+#faqs p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#faqs div.ui-accordion-content {
+    padding-bottom: 0px;
+}
+
+hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.ui_tpicker_minute_slider .ui-slider-handle, .ui_tpicker_hour_slider .ui-slider-handle {
+    background: var(--main-primary) none repeat scroll 0 0 !important;
+    border: 1px solid var(--main-primary) !important;
+}
+
+#modalJobDescriptions .modal-body {
+    text-align: justify;
+}
+
+#modalJobDescriptions .modal-dialog {
+    width: 1170px;
+}
+
+.reset-select {
+    margin-right: 4px;
+}
+
+.head {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.head a {
+    text-decoration: none;
+    color: #000;
+}
+
+.modalPolicyCompare .modal-dialog {
+    width: 1170px;
+    height: 90%;
+}
+
+.old-policy {
+    width: 49.8%;
+    text-align: justify;
+    display: inline-block;
+    padding: 20px;
+    height: 500px;
+    overflow-y: scroll;
+}
+
+.new-policy-required {
+    width: 49.8%;
+    text-align: justify;
+    display: inline-block;
+    padding: 20px;
+    height: 500px;
+    overflow-y: scroll;
+}
+
+#content_raw {
+    width: 48%;
+    height: 500px;
+    display: inline-block;
+    text-align: justify;
+}
+
+.modal #cke_content_raw {
+    display: inline-block;
+    text-align: justify;
+}
+
+#cke_content_raw .cke_inner .cke_contents {
+    height: 395px !important;
+}
+
+.policies-out-of {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.update-complete-text {
+    text-align: center;
+}
+
+.update-complete {
+    margin-top: 20px;
+    text-transform: uppercase;
+}
+
+.cancel-link {
+    margin-top: 10px;
+}
+
+.policy-update-notification {
+    margin-top: 2px;
+    background-color: #ff0000;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.policy-notification {
+    margin-top: 7px;
+}
+
+.policy-update-button {
+    color: #fff;
+    background-color: transparent;
+}
+
+.policy-update-button:hover, .policy-update-button:active, .policy-update-button:focus, .policy-update-button:visited {
+    color: #fff;
+}
+
+.dataTables_wrapper > .table > tbody > tr.active > td {
+    background-color: transparent;
+}

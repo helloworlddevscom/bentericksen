@@ -1,0 +1,53 @@
+<div class="cal-month-day <%= cls %>">
+    <span class="pull-right"
+          data-cal-date="<%= data_day %>"
+          data-cal-view="day"
+          data-toggle="tooltip"
+          title="<%= tooltip %>"><%= day %></span>
+    <% /* NOTE: there needs to be NO WHITESPACE in the above span value, as it would cause an error */ %>
+    <div class="events-list"
+         data-cal-start="<%= start %>"
+         data-cal-end="<%= end %>">
+        <% if (events.length > 0) { %>
+            <% if (events.length > 2) { %>
+                <% var counter = 0 %>
+                <% _.each(events, function(event) { %>
+                    <% if (counter >= 2) { %>
+                        <% return; %>
+                    <% } else {%>
+                        <button class="btn btn-primary btn-lg calendar-modal-button calendar-name request <%= event['class'] %>"
+                                data-id="<%= event.id %>"
+                                data-toggle="modal"
+                                data-target="#requestModal"
+                                data-event-class="<%= event['class'] %>"
+                                title="<%= event.employee %>"><%= event.employee %></button>
+                    <% } %>
+                    <% counter++; %>
+                <% }); %>
+
+                <!-- Button trigger modal -->
+                <button type="button"
+                        class="btn btn-primary btn-lg calendar-modal-button view-more"
+                        data-toggle="modal"
+                        data-target="#viewMoreModal">View More</button>
+            <% } else if (events.length < 3) { %>
+                <% _.each(events, function(event) { %>
+                    <button class="btn btn-primary btn-lg calendar-modal-button calendar-name request <%= event['class'] %>"
+                            data-id="<%= event.id %>"
+                            data-toggle="modal"
+                            data-target="#requestModal"
+                            data-event-class="<%= event['class'] %>"
+                            data-toggle="tooltip"
+                            title="<%= event.employee %>"
+                            data-start="<%= event.start %>"><%= event.employee %></button>
+                <% }); %>
+            <% } %>
+        <% } %>
+    </div>
+</div>
+
+<script>
+    $('#myModal').on('shown.bs.modal', function () {
+      $('#myInput').focus()
+    })
+</script>

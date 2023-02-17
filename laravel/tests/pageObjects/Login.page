@@ -1,0 +1,35 @@
+const Page = require('./Page')
+
+let options = {
+    url: process.env.APP_URL,
+    user: 'admin@example.com',
+    pass: 'fff',
+}
+
+class LoginPage extends Page {
+    async open () {
+        super.open('/auth/login')
+        browser.pause(1000)
+    }
+
+    get email() {
+        return $('[name=email]')
+    }
+
+    get password() {
+        return $('[name=password]')
+    }
+
+    get submit() {
+        return $('[type=submit]')
+    }
+
+    async login() {
+        this.email.waitForDisplayed({ timeout: 5000 })
+        this.email.addValue(options.user)
+        this.password.addValue(options.pass)
+        this.submit.click()
+    }
+}
+
+module.exports = new LoginPage()

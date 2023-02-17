@@ -1,0 +1,32 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 10
+      ruby: 2.6
+      php: 7.3
+    commands:
+      - gem install capistrano -v 2.15.5
+      - gem install dotenv
+      - php -v
+      - php -m
+      - lsb_release -a
+      - LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php
+      - apt-get update -y
+      - apt-get install -y php7.3-gd
+      - ls /usr/lib/php/20180731
+      - mkdir -p /usr/local/etc/php/conf.d/
+      - touch /usr/local/etc/php/conf.d/extra_config.ini
+      - "echo extension_dir=\"/usr/lib/php/20180731/\" >> /usr/local/etc/php/conf.d/extra_config.ini"
+      - "echo extension=gd.so >> /usr/local/etc/php/conf.d/extra_config.ini"
+      - cat /usr/local/etc/php/conf.d/extra_config.ini
+      - php -m
+  build:
+    commands:
+      - aws s3 cp --quiet --sse aws:kms s3://mtm-dev-build-agent-data/ssh.tar.gz ./ssh.tar.gz
+      - tar -C ~/.ssh -xzf ./ssh.tar.gz
+      - rm ./ssh.tar.gz
+      - mv ~/.ssh/ssh/* ~/.ssh/
+      - bash ci/build.sh
+      - cap $ENVIRONMENT deploy

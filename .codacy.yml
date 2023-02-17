@@ -1,0 +1,17 @@
+engines:
+  eslint:
+    enabled: true,
+    exclude_paths:
+    - '**/*.min.js'
+    - '**/*.spec.js'
+exclude_paths:
+- 'ci/**/*'
+- 'config/**/*'
+- 'httpdocs/**/*'
+- 'laravel/package.json'
+- 'laravel/package-lock.json'
+- 'laravel/node_modules/**/*'
+- 'laravel/vendor/**/*'
+- 'laravel/webpack.mix.js'
+- 'stage/**/*'
+- 'webroot/**/*'

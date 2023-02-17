@@ -1,0 +1,222 @@
+const Page = require('./Page')
+
+class AdminBusinessPage extends Page {
+  // Open an existing business
+  open () {
+    super.open('/admin')
+  }
+  // Create a new Business
+  create () {
+    super.open('/admin/business/create')
+  }
+
+  // Build a Generic business
+  build ({ properties = {}, selects = {}, radios = [] } = {}) {
+    
+    $('[name=name]').addValue('E2E Test ' + Date.now())
+    $('[name=address1]').addValue('E2E Test 01 Address')
+    $('[name=address2]').addValue('Apt. 101')
+    $('[name=city]').addValue('Gainesville')
+    $('[name=state]').selectByVisibleText('Florida')
+
+    $('[name=postal_code]').doubleClick()
+    $('[name=postal_code]').addValue('32606')
+
+    $('[name=phone1]').click()
+    $('[name=phone1]').addValue('1111111111')
+
+    $('[name=primary_first_name]').addValue('John')
+    $('[name=primary_middle_name]').addValue('A')
+    $('[name=primary_last_name]').addValue('Doe')
+    $('[name=primary_email]').addValue(`mike+${Date.now()}@helloworlddevs.com`)
+    $('[name=owner_login_password]').addValue('password')
+
+    $('[name=type]').selectByVisibleText('Dental')
+    $('[name=subtype]').selectByVisibleText('General')
+    $('[name="asa[type]"]').selectByVisibleText('Annual 500+')
+
+    $('[name="asa[expiration]"]').click()
+
+    $('[data-handler="selectYear"]').selectByVisibleText((new Date()).getFullYear() + 1)
+    $('[data-handler="selectDay"]').click()
+
+    Object.keys(properties).forEach((key) => {
+      $(key).setValue(properties[key])
+    })
+
+    Object.keys(selects).forEach((key) => {
+      $(key).selectByVisibleText(selects[key])
+    })
+
+    radios.forEach((key) => {
+      $(key).click()
+    })
+
+    $('[value="view-as"]').click()
+    
+    browser.pause(1000)
+
+    if ($('#renewalNoticeCancel').isDisplayed()) {
+      $('#renewalNoticeCancel').click()
+    }
+  }
+
+  // Generate a Business from an existing seedConfig
+  generate ({ seedConfig = {}, properties = {}, selects = {}, radios = [] } = {}) {
+    const { state } =  seedConfig.modules.initialSetup;
+    const businessName = properties.businessName || 'E2E ' + Date.now() + ':: ' + state.plan_name
+
+    $('[name=name]').addValue( businessName )
+    $('[name=address1]').addValue(state.address.address1)
+    $('[name=address2]').addValue(state.address.address2)
+    $('[name=city]').addValue(state.address.city)
+    $('[name=state]').selectByVisibleText('Florida')
+
+    $('[name=postal_code]').doubleClick()
+    $('[name=postal_code]').addValue(state.address.zip)
+
+    $('[name=phone1]').click()
+    $('[name=phone1]').addValue(state.address.phone)
+
+    $('[name=primary_first_name]').addValue('John')
+    $('[name=primary_middle_name]').addValue('A')
+    $('[name=primary_last_name]').addValue('Doe')
+    $('[name=primary_email]').addValue(`jeff+${Date.now()}@helloworlddevs.com`)
+    $('[name=owner_login_password]').addValue('password')
+
+    $('[name=type]').selectByVisibleText('Dental')
+    $('[name=subtype]').selectByVisibleText('General')
+    $('[name="asa[type]"]').selectByVisibleText('Annual 500+')
+
+    $('[name="asa[expiration]"]').click()
+
+    $('[data-handler="selectYear"]').selectByVisibleText((new Date()).getFullYear() + 1)
+    $('[data-handler="selectDay"]').click()
+
+    Object.keys(properties).forEach((key) => {
+      $(key).addValue(properties[key])
+    })
+
+    Object.keys(selects).forEach((key) => {
+      $(key).selectByVisibleText(selects[key])
+    })
+
+    radios.forEach((key) => {
+      $(key).click()
+    })
+
+    $('[value="view-as"]').click()
+
+    browser.pause(1000)
+
+    if ($('#renewalNoticeCancel').isDisplayed()) {
+      $('#renewalNoticeCancel').click()
+    }
+  }
+
+  viewAs ({ properties = {}}) {
+    const { businessName } = properties
+    super.open('/admin')
+    browser.pause(2000)
+    
+    $(`td=${businessName}`).$('..').$('a=VIEW AS CLIENT').click()
+
+    browser.pause(1000)
+
+    if ($('#renewalNoticeCancel').isDisplayed() && $('#renewalNoticeCancel').isClickable()) {
+      $('#renewalNoticeCancel').click()
+    }
+  }
+
+  // DUPLICATE:  OKTODELETE
+  // create ({ properties = {}, selects = {}, radios = [] } = {}) {
+  //   $('[name=name]').addValue('E2E Test ' + Date.now())
+  //   $('[name=address1]').addValue('E2E Test 01 Address')
+  //   $('[name=address2]').addValue('Apt. 101')
+  //   $('[name=city]').addValue('Gainesville')
+  //   $('[name=state]').selectByVisibleText('Florida')
+  //
+  //   $('[name=postal_code]').doubleClick()
+  //   $('[name=postal_code]').addValue('32606')
+  //
+  //   $('[name=phone1]').click()
+  //   $('[name=phone1]').addValue('1111111111')
+  //
+  //   $('[name=primary_first_name]').addValue('John')
+  //   $('[name=primary_middle_name]').addValue('A')
+  //   $('[name=primary_last_name]').addValue('Doe')
+  //   $('[name=primary_email]').addValue(`mike+${Date.now()}@helloworlddevs.com`)
+  //   $('[name=owner_login_password]').addValue('password')
+  //
+  //   $('[name=type]').selectByVisibleText('Dental')
+  //   $('[name=subtype]').selectByVisibleText('General')
+  //   $('[name="asa[type]"]').selectByVisibleText('Annual 500+')
+  //
+  //   $('[name="asa[expiration]"]').click()
+  //
+  //   $('[data-handler="selectYear"]').selectByVisibleText((new Date()).getFullYear() + 1)
+  //   $('[data-handler="selectDay"]').click()
+  //
+  //   Object.keys(properties).forEach((key) => {
+  //     $(key).addValue(properties[key])
+  //   })
+  //
+  //   Object.keys(selects).forEach((key) => {
+  //     $(key).selectByVisibleText(selects[key])
+  //   })
+  //
+  //   radios.forEach((key) => {
+  //     $(key).click()
+  //   })
+  //
+  //   $('[value="view-as"]').click()
+  // }
+  // generate ({ seedConfig = {}, properties = {}, selects = {}, radios = [] } = {}) {
+  //   const { state } =  seedConfig.modules.initialSetup;
+  //
+  //   $('[name=name]').addValue('E2E Test ' + Date.now())
+  //   $('[name=address1]').addValue(state.address.address1)
+  //   $('[name=address2]').addValue(state.address.address2)
+  //   $('[name=city]').addValue(state.address.city)
+  //   $('[name=state]').selectByVisibleText('Florida')
+  //
+  //   $('[name=postal_code]').doubleClick()
+  //   $('[name=postal_code]').addValue(state.address.zip)
+  //
+  //   $('[name=phone1]').click()
+  //   $('[name=phone1]').addValue(state.address.phone)
+  //
+  //   $('[name=primary_first_name]').addValue('John')
+  //   $('[name=primary_middle_name]').addValue('A')
+  //   $('[name=primary_last_name]').addValue('Doe')
+  //   $('[name=primary_email]').addValue(`jeff+${Date.now()}@helloworlddevs.com`)
+  //   $('[name=owner_login_password]').addValue('password')
+  //
+  //   $('[name=type]').selectByVisibleText('Dental')
+  //   $('[name=subtype]').selectByVisibleText('General')
+  //   $('[name="asa[type]"]').selectByVisibleText('Annual 500+')
+  //
+  //   $('[name="asa[expiration]"]').click()
+  //
+  //   $('[data-handler="selectYear"]').selectByVisibleText((new Date()).getFullYear() + 1)
+  //   $('[data-handler="selectDay"]').click()
+  //
+  //   Object.keys(properties).forEach((key) => {
+  //     $(key).addValue(properties[key])
+  //   })
+  //
+  //   Object.keys(selects).forEach((key) => {
+  //     $(key).selectByVisibleText(selects[key])
+  //   })
+  //
+  //   radios.forEach((key) => {
+  //     $(key).click()
+  //   })
+  //
+  //   $('[value="view-as"]').click()
+  // }
+  ///////////////////////////
+
+}
+
+module.exports = new AdminBusinessPage()

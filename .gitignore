@@ -1,0 +1,64 @@
+*.sublime-project
+*.sublime-workspace
+/database
+/pdf
+/stage
+/bentericksenit
+/laravel/storage/bentericksen/policy
+/laravel/storage
+/puphpet
+/html
+/.vagrant
+Vagrantfile
+
+# IDE files
+/.idea
+/laravel/.phpstorm.meta.php
+/laravel/_ide_helper.php
+/laravel/_ide_helper_models.php
+
+# Compiled Assets
+/httpdocs/assets/js/app.js
+/httpdocs/assets/styles/app.css
+/httpdocs/assets/mix-manifest.json
+/httpdocs/storage
+
+/laravel/public/assets/js/app.js
+/laravel/public/assets/styles/app.css
+/laravel/public/assets/mix-manifest.json
+/laravel/public/storage
+
+# Testing stuff
+/laravel/coverage-report
+
+# Docker stuff
+/data
+
+# Local SSL
+/docker/nginx/nginx*
+
+.DS_Store
+node_modules
+*/dist*
+
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+/resources/views/devserver

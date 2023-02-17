@@ -1,0 +1,387 @@
+const Page = require('./Page')
+
+class BonusPro extends Page {
+  open () {
+    super.open('/bonuspro')
+  }
+
+  step1() {
+    $('a=ADD NEW PLAN').click()
+    $('[name=plan_id]').addValue('E2E01')
+    $('[name=plan_name]').addValue('E2E TEST PLAN')
+    $('[name=start_month]').addValue((new Date()).getMonth() + 1)
+    $('[name=start_year]').addValue((new Date()).getFullYear())
+    $('[name=password]').addValue('fff')
+    $('[name=password_confirmation]').addValue('fff')
+    $('[name=distribution_type]').selectByVisibleText('Hours')
+    $('[name=rolling_average]').selectByVisibleText('2 Months')
+    $('[name=type_of_practice]').selectByVisibleText('General')
+  }
+
+  step1_gen( state, radios ) {
+    $('a=ADD NEW PLAN').click()
+    $('[name=plan_id]').addValue(state.plan_id)
+    $('[name=plan_name]').addValue(state.plan_name)
+    $('[name=start_month]').addValue((new Date()).getMonth() + 1)
+    $('[name=start_year]').addValue((new Date()).getFullYear())
+    $('[name=password]').addValue('fff')
+    $('[name=password_confirmation]').addValue('fff')
+    $('[name=distribution_type]').selectByAttribute('value', state.distribution_type)
+    $('[name=rolling_average]').selectByAttribute('value',state.rolling_average)
+    $('[name=type_of_practice]').selectByAttribute('value',state.type_of_practice)
+
+    radios.forEach((key) => {
+      $(key).click()
+    })
+  }
+
+  step2() {
+    Array(6).fill(1).map((n, i) => n * i).forEach((n) => {
+      this.addValue($(`[name="months.${n}.production_amount"]`), 100000 + (n * 2000))
+    })
+
+    Array(6).fill(1).map((n, i) => n * i).forEach((n) => {
+      this.addValue($(`[name="months.${n}.collection_amount"]`), 100000 + (n * 1000))
+    })
+  }
+
+  step2_gen( planData, state ) {
+    Array(6).fill(1).map((n, i) => n * i).forEach((n) => {
+      this.addValue($(`[name="months.${n}.production_amount"]`), planData.state.months[n].production_amount)
+    })
+
+    Array(6).fill(1).map((n, i) => n * i).forEach((n) => {
+      this.addValue($(`[name="months.${n}.collection_amount"]`), planData.state.months[n].collection_amount)
+    })
+
+    if (state.hygiene_plan === 1) {
+      Array(6).fill(1).map((n, i) => n * i).forEach((n) => {
+        this.addValue($(`[name="months.${n}.hygiene_production_amount"]`), planData.state.months[n].hygiene_production_amount)
+      })
+    }
+  }
+
+  next() {
+    $('button=Next').click()
+    browser.pause(2000)
+  }
+
+  step3({ type = 'admin_assistant' } = {}) {
+    $('a=ADD EMPLOYEE').click()
+
+    browser.pause(2000)
+
+    $('button=CREATE NEW EMPLOYEE').click()
+
+    browser.pause(2000)
+
+    $('[name=first_name]').addValue('Test')
+    $('[name=last_name]').addValue(`Employee ${type} ${Date.now()}`)
+    $('[name=email]').addValue(`mike+${Date.now()}@helloworlddevs.com`)
+
+    $('[name=bp_eligibility_date]').addValue(`${(new Date()).getMonth() + 1}/${(new Date()).getFullYear()}`)
+
+    $('#employee-data').click()
+
+    $(`#bp_employee_type_${type}`).scrollIntoView()
+    $(`#bp_employee_type_${type}`).click()
+
+    $('#employee-data').$('a=NEXT').click()
+
+    browser.pause(500)
+
+    Array(6).fill(1).map((n, i) => n * i).forEach((n) => {
+      this.addValue($('#employee-data').$(`[name="monthlyData.${n}.gross_pay"]`), 4500 + (n * 100))
+    })
+
+    Array(6).fill(1).map((n, i) => n * i).forEach((n) => {
+      this.addValue($('#employee-data').$(`[name="monthlyData.${n}.hours_worked"]`), 45 + (n * 2))
+    })
+
+    $('#employee-data').$('a=SAVE').click()
+  }
+
+  step3_gen({ type = 'admin_assistant', employeeCount = 0,  employeesAndFunds = {} } = {}) {
+    $('a=ADD EMPLOYEE').click()
+
+    browser.pause(2000)
+
+    $('button=CREATE NEW EMPLOYEE').click()
+
+    browser.pause(2000)
+
+    $('[name=first_name]').addValue(employeesAndFunds.state.employees[`${employeeCount}`].first_name)
+    $('[name=last_name]').addValue(employeesAndFunds.state.employees[`${employeeCount}`].last_name)
+    $('[name=email]').addValue(employeesAndFunds.state.employees[`${employeeCount}`].email)
+
+    $('[name=bp_eligibility_date]').addValue(employeesAndFunds.state.employees[`${employeeCount}`].bp_eligibility_date)
+
+    $('#employee-data').click()
+
+    $(`#bp_employee_type_${type}`).scrollIntoView()
+    $(`#bp_employee_type_${type}`).click()
+
+    $('#employee-data').$('a=NEXT').click()
+
+    browser.pause(500)
+
+    Array(6).fill(1).map((n, i) => n * i).forEach((n) => {
+      this.addValue($('#employee-data').$(`[name="monthlyData.${n}.gross_pay"]`), employeesAndFunds.state.employees[`${employeeCount}`].monthlyData[n].gross_pay)
+    })
+
+    Array(6).fill(1).map((n, i) => n * i).forEach((n) => {
+      this.addValue($('#employee-data').$(`[name="monthlyData.${n}.hours_worked"]`), employeesAndFunds.state.employees[`${employeeCount}`].monthlyData[n].hours_worked)
+    })
+
+    $('#employee-data').$('a=SAVE').click()
+  }
+
+  create() {
+
+    this.step1()
+
+    this.next()
+
+    this.step2()
+
+    this.next()
+
+    this.step3()
+
+    this.step3({
+      type: 'hygienist'
+    })
+
+    this.next()
+  }
+
+  generatePlan({
+    seedConfig = {},
+    radios = [],
+    generateEmployees = 4,
+    generateEmployeeTypes = ['admin_assistant', 'admin_assistant', 'admin_assistant', 'hygienist'] }
+    = {}) {
+    const { state } =  seedConfig.modules.initialSetup;
+    const { planData, employeesAndFunds } =  seedConfig.modules;
+
+    this.step1_gen( state, radios )
+
+    this.next()
+
+    this.step2_gen( planData, state )
+
+    this.next()
+
+    for (let employeeCount = 0; employeeCount < generateEmployees; employeeCount++) {
+      this.step3_gen( {
+        employeesAndFunds,
+        employeeCount,
+        type: generateEmployeeTypes[employeeCount]
+      })
+    }
+
+    this.next()
+  }
+
+  generateTDDPlan({ seedConfig = {}, radios = []  } = {}) {
+    const { state } =  seedConfig.modules.initialSetup;
+    const { planData, employeesAndFunds } =  seedConfig.modules;
+
+    this.step1_gen( state, radios )
+
+    this.next()
+
+    this.step2_gen( planData, state )
+
+    this.next()
+
+    this.step3_gen( {
+      employeesAndFunds,
+      employeeCount: 0
+    })
+
+    this.step3_gen( {
+      employeesAndFunds,
+      employeeCount: 1
+    })
+
+    this.step3_gen( {
+      employeesAndFunds,
+      employeeCount: 2
+    })
+
+    this.step3_gen({
+      employeesAndFunds,
+      employeeCount: 3,
+      type: 'hygienist'
+    })
+
+    this.step3_gen({
+      employeesAndFunds,
+      employeeCount: 4,
+      type: 'hygienist'
+    })
+
+    this.next()
+  }
+
+
+  loginToPlan() {
+    $('a=VIEW').click()
+    $('[name="password"]').addValue('fff')
+    browser.keys(['Enter'])
+  }
+
+  viewPlan({ properties = {} } = {}) {
+    const planName = properties.planName;
+
+    const plans = $('#active_table').$('tbody').$$('tr');
+
+    plans.forEach((data, index ) => {
+      const plan = data.$$('td');
+      expect(plans[0]).toExist();
+      const name = plan[0].getText();
+
+      if (planName === name) {
+        plans[index].$('a=VIEW').click()
+        $('[name="password"]').addValue('fff')
+        browser.keys(['Enter'])
+      }
+    })
+  }
+
+  editOpenMonth() {
+    $('a=Monthly Data').click()
+    browser.pause(2000)
+    $('button=EDIT').click()
+    browser.pause(2000)
+
+    this.addValue($('[name=production_amount]'), 200100)
+    this.addValue($('[name=collection_amount]'), 200200)
+
+    $$('[name=hours_worked]').forEach((e, n) => {
+      if (!browser.isElementDisplayed(e.elementId)) {
+        return
+      }
+      this.addValue(e, 45 + (n * 2))
+    })
+
+    $$('[name=gross_pay]').forEach((e, n) => {
+      if (!browser.isElementDisplayed(e.elementId)) {
+        return
+      }
+      this.addValue(e, 1000 + (n * 2))
+    })
+
+    browser.pause(1000)
+
+    $('#month-data').$('button=next').click()
+
+    browser.pause(1000)
+
+    // (JB) Possible redundancy in below:   Missing from WIP testing merge branch
+    // Leaving until shown otherwise
+    $('#month-data').$('button=accept').scrollIntoView()
+    $('#month-data').$('button=accept').click()
+    browser.pause(2000)
+    $('#month-data').$('button=YES').click()
+  }
+
+  existsAndDisplayed (element) {
+    return element.isExisting() && element.isDisplayed()
+  }
+  /**
+   *
+   * Generate a month of data from template
+   * NOTE:  properties.month is the month to evaluate for data.
+   * We splice off the initialization data from the array to find remaining months.
+   * evaluatedMonths = month array.
+   * So if sending many months, think of an array.   First month is 0
+   *
+   *
+   * @param seedConfig
+   * @param properties
+   * @param selects
+   * @param radios
+   */
+  editGenerateOpenMonth({ seedConfig = {}, properties = { month: 0 }} = {}) {
+    const month = properties.month
+    const { planData, employeesAndFunds } = seedConfig.modules
+
+    // Remove the initialization months
+    // These are additional months to add to the plan
+    const evaluatedMonths = [...planData.state.months].slice(6)
+    const evaluatedEmployees = employeesAndFunds.state.employees
+    const evaluatedMonth = evaluatedMonths.length - 1 - month
+
+    const planMonths = planData.state.months
+    // This grabs the last entry.   When month = 0, we take the last one.
+    // 0 is always the end.  Each new month gets a number.
+    // 1 more month - month:1.   Shift to the left from the end in the array.
+    const evaluatedEmployeeMonth = planMonths.length - 1 - month
+
+    $('a=Monthly Data').click()
+    browser.pause(2000)
+    $('button=EDIT').click()
+    browser.pause(2000)
+
+    // Grabbing from planData/month
+    // planData.state.months[n].production_amount)
+    this.addValue($('[name=production_amount]'), evaluatedMonths[evaluatedMonth].production_amount)
+    this.addValue($('[name=collection_amount]'), evaluatedMonths[evaluatedMonth].collection_amount)
+
+    if (this.existsAndDisplayed($('[name=hygiene_production_amount]'))) {
+      this.addValue($('[name=hygiene_production_amount]'), evaluatedMonths[evaluatedMonth].hygiene_production_amount)
+    }
+
+    // Grabbing from the employee object
+    // $('[name=first_name]').addValue(employeesAndFunds.state.employees[`${employeeCount}`].first_name)
+    $$('[name=hours_worked]').forEach((e, n) => {
+      if (!browser.isElementDisplayed(e.elementId)) {
+        return
+      }
+      this.addValue(e, evaluatedEmployees[n].monthlyData[evaluatedEmployeeMonth].hours_worked)
+    })
+
+    $$('[name=gross_pay]').forEach((e, n) => {
+      if (!browser.isElementDisplayed(e.elementId)) {
+        return
+      }
+      this.addValue(e, evaluatedEmployees[n].monthlyData[evaluatedEmployeeMonth].gross_pay)
+    })
+
+    if (this.existsAndDisplayed($('#month-data').$('#data').$('[href="#hygiene"]'))) {
+      $('#month-data').$('#data').$('[href="#hygiene"]').click()
+
+      browser.pause(1000)
+
+      $$('[name=hours_worked]').forEach((e, n) => {
+        if (!browser.isElementDisplayed(e.elementId)) {
+          return
+        }
+        this.addValue(e, evaluatedEmployees[n].monthlyData[evaluatedEmployeeMonth].hours_worked)
+      })
+  
+      $$('[name=gross_pay]').forEach((e, n) => {
+        if (!browser.isElementDisplayed(e.elementId)) {
+          return
+        }
+        this.addValue(e, evaluatedEmployees[n].monthlyData[evaluatedEmployeeMonth].gross_pay)
+      })
+    }
+
+    browser.pause(1000)
+
+    $('#month-data').$('button=next').click()
+
+    browser.pause(1000)
+
+    $('#month-data').$('button=accept').scrollIntoView()
+    $('#month-data').$('button=accept').click()
+    browser.pause(2000)
+    $('#month-data').$('button=YES').click()
+  }
+
+}
+
+module.exports = new BonusPro()

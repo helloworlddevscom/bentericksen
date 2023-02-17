@@ -1,0 +1,44 @@
+name: build firmware
+
+on:
+  push:
+    branches:
+      - docker
+
+jobs:
+  build_and_push_php:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build php image.
+      run: docker build -t "docker.pkg.github.com/helloworlddevs/bentericksen/bentericksen-php:3.0" -f docker/php/Dockerfile docker/php/
+    - name: Docker login
+      run: docker login docker.pkg.github.com -u $GITHUB_ACTOR -p $GITHUB_TOKEN
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    - name: Publish php image
+      run: docker push "docker.pkg.github.com/helloworlddevs/bentericksen/bentericksen-php:3.0"
+  build_and_push_node:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build node image.
+      run: docker build -t "docker.pkg.github.com/helloworlddevs/bentericksen/bentericksen-node:3.0" -f docker/node/Dockerfile docker/node/
+    - name: Docker login
+      run: docker login docker.pkg.github.com -u $GITHUB_ACTOR -p $GITHUB_TOKEN
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    - name: Publish node image
+      run: docker push "docker.pkg.github.com/helloworlddevs/bentericksen/bentericksen-node:3.0"
+  build_and_push_mysql:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build mysql image
+      run: docker build -t "docker.pkg.github.com/helloworlddevs/bentericksen/bentericksen-mysql:2.1" -f docker/mysql/Dockerfile docker/mysql/
+    - name: Docker login
+      run: docker login docker.pkg.github.com -u $GITHUB_ACTOR -p $GITHUB_TOKEN
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    - name: Publish mysql image
+      run: docker push "docker.pkg.github.com/helloworlddevs/bentericksen/bentericksen-mysql:2.1"

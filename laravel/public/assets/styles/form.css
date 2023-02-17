@@ -1,0 +1,84 @@
+body {
+	padding-top: 30px;
+}
+#forms {
+	border: 1px solid black;
+}
+#inputs {
+	border: 1px solid green;
+}
+#inputs .btn-group-vertical {
+	width: 100%;
+}
+.has-feedback-left .form-control {
+	padding-left: 35px;
+}
+.form-control-feedback-left {
+	left: 15px;
+	border-right: 1px solid #eee;
+	border-radius: 5px 0 0 5px;
+}
+.form-input-edit {
+	cursor: pointer;
+}
+.form-input-edit:hover {
+	color: green;
+}
+.fieldRow {
+	min-height: 35px;
+	margin: 15px 0;
+	list-style: none;
+	width: 100%;
+	/background: #ddd;
+}
+.fieldRow:hover {
+	background: #ddd;
+}
+.fieldRow li {
+	float: left;
+	margin: 0 10px;
+	min-width: 30%;
+}
+.fieldInput {
+	margin: 30px 0;
+}
+.fieldInput li {
+	height: 50px;
+}
+
+.field-box {
+	background: #fefefe;
+	min-width: 100%;
+	box-sizing: border-box;
+	border: 1px solid yellow;
+	position: relative;
+	max-height: 70px;
+	overflow: hidden;
+}
+.field-box:hover {
+	height: 70px;
+	cursor: move;
+	overflow: scroll;
+	padding-top: 10px;
+}
+.options-box {
+	display: none;
+}
+.options-box a {
+	display: inline-block;
+}
+.field-box:hover .options-box {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.ui-state-highlight {
+	background: green;
+	height: 40px;
+	
+}
+.hovered {
+	border-top: 1px solid red;
+	height: 50px;
+}

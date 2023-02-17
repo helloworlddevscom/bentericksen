@@ -1,0 +1,9 @@
+watch:
+  directories:
+    - app
+    - bentericksen
+    - tests
+  fileMask: '*.php'
+notifications:
+  passingTests: false
+  failingTests: true

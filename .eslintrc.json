@@ -1,0 +1,22 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true,
+    "jquery": true
+  },
+  "extends": [
+    "vue"
+  ],
+  "plugins": [
+    "vue"
+  ],
+  "rules": {
+    "camelcase": "off",
+    "quotes": "off",
+    "semi": "off"
+  }
+}

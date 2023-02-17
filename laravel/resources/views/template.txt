@@ -1,0 +1,20 @@
+@extends('admin.wrap')
+
+@section('content')
+	<div id="main_body">
+		<div class="container" id="main">
+			<div class="row main_wrap">
+
+
+				<!-- -->
+
+				<!-- -->
+
+			</div>
+		</div>
+@stop
+
+@section('foot')
+	@parent
+
+@stop

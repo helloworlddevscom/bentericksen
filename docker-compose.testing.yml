@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  db:
+    image: docker.pkg.github.com/helloworlddevs/bentericksen/bentericksen-mysql:latest
+    container_name: hrdirector-testing-db
+    env_file: [laravel/.env.testing.example]
+    working_dir: /workspace
+    volumes:
+      - ./docker/mysql/hrdirector.cnf:/etc/mysql/conf.d/hrdirector.cnf
+  php:
+    image: docker.pkg.github.com/helloworlddevs/bentericksen/bentericksen-php:3.0
+    container_name: hrdirector-testing-php
+    working_dir: /code/laravel
+    command: "./test.sh"
+    volumes:
+      - ./httpdocs:/code/httpdocs
+      - ./laravel:/code/laravel
+      - ./laravel/.env.testing.example:/code/laravel/.env
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+      - ./docker/php/test.sh:/code/laravel/test.sh
+      - ./docker/php/test-setup.sh:/code/laravel/test-setup.sh
+      - ./docker/php/watch.sh:/code/laravel/watch.sh
+      - ./docker/php/test-single.sh:/usr/local/bin/test
+    depends_on:
+      - db
+    env_file: [laravel/.env.testing.example]
+    stdin_open: true
+    tty: true
+    

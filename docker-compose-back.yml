@@ -1,0 +1,60 @@
+version: '3'
+
+services:
+  db:
+    build:
+      context: ./docker/mysql
+    container_name: hrdirector-db
+    env_file: [laravel/.env.example]
+    working_dir: /workspace
+    volumes:
+      - ~/.ssh/id_rsa:/root/.ssh/id_rsa
+      - ./data:/var/lib/mysql
+      - ./docker/mysql/hrdirector.cnf:/etc/mysql/conf.d/hrdirector.cnf
+      - ./docker/db/import.sh:/workspace/import.sh
+      - ./config:/workspace/config
+      - ./Capfile:/workspace/Capfile
+      - ./laravel/.env.example:/workspace/laravel/.env
+      - ./database:/workspace/database
+  php:
+    build:
+      context: ./docker/php
+    container_name: hrdirector-php
+    working_dir: /code/laravel
+    volumes:
+      - ./httpdocs:/code/httpdocs
+      - ./laravel:/code/laravel
+      - ./laravel/.env.example:/code/.env
+    depends_on:
+      - db
+    env_file: [laravel/.env.example]
+  web:
+    image: nginx:latest
+    container_name: hrdirector-web
+    depends_on:
+      - php
+    volumes:
+      - ./httpdocs:/code/httpdocs
+      - ./laravel:/code/laravel
+      - ./docker/nginx/site.conf:/etc/nginx/conf.d/default.conf
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.hrdirector.rule=Host(`hrdirector.localhost`)"
+      - "traefik.http.routers.hrdirector.entrypoints=web"
+  workbench:
+    build:
+      context: ./docker/node
+    container_name: hrdirector-workbench
+    user: "node"
+    ports:
+      - "8089:8089"
+      - "1080:1080"
+      - "1025:1025"
+    working_dir: /home/node/app
+    command: "./run.sh"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./laravel:/home/node/app
+      - ./docker/workbench/run.sh:/home/node/app/run.sh
+      - ./docker/workbench/setup.sh:/home/node/app/setup.sh
